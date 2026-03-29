@@ -1,0 +1,721 @@
+openapi: 3.0.3
+info:
+  title: WaveSpeed AI API
+  description: |
+    WaveSpeed AI is a multi-model generation platform providing unified API access to 700+ AI models
+    for image generation, video generation, and audio generation. The API follows an async task pattern:
+    submit a generation request, then poll for the result.
+  version: '3.0'
+  contact:
+    name: WaveSpeed AI
+    url: https://wavespeed.ai
+servers:
+  - url: https://api.wavespeed.ai/api/v3
+    description: Production server
+security:
+  - BearerAuth: []
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    # ─── Common Response Wrapper ───
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: Response status code. 200 indicates success.
+        message:
+          type: string
+          description: Response status message.
+
+    # ─── Task/Prediction Schemas ───
+    TaskUrls:
+      type: object
+      properties:
+        get:
+          type: string
+          description: URL to retrieve the task result.
+
+    TaskTimings:
+      type: object
+      properties:
+        inference:
+          type: number
+          description: Inference processing time in milliseconds.
+
+    TaskData:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique task/prediction identifier.
+        model:
+          type: string
+          description: Model identifier used for generation.
+        outputs:
+          type: array
+          items:
+            type: string
+          description: Array of output URLs (images, videos, audio). Populated when status is completed.
+        urls:
+          $ref: '#/components/schemas/TaskUrls'
+        has_nsfw_contents:
+          type: array
+          items:
+            type: boolean
+          description: NSFW detection flags per output.
+        status:
+          type: string
+          description: Current task status.
+          enum:
+            - created
+            - processing
+            - completed
+            - failed
+        created_at:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp when the task was created.
+        error:
+          type: string
+          description: Error message if the task failed.
+        timings:
+          $ref: '#/components/schemas/TaskTimings'
+
+    TaskResponse:
+      allOf:
+        - $ref: '#/components/schemas/ApiResponse'
+        - type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/TaskData'
+
+    # ─── Prediction History ───
+    PredictionItem:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique prediction identifier.
+        model:
+          type: string
+          description: Model identifier used.
+        outputs:
+          type: array
+          items:
+            type: string
+          description: Array of output URLs.
+        status:
+          type: string
+          description: Prediction status.
+          enum:
+            - created
+            - processing
+            - completed
+            - failed
+        created_at:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp when created.
+        executionTime:
+          type: number
+          description: Total execution time in milliseconds.
+        timings:
+          $ref: '#/components/schemas/TaskTimings'
+
+    PredictionListData:
+      type: object
+      properties:
+        page:
+          type: integer
+          description: Current page number.
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/PredictionItem'
+
+    PredictionListResponse:
+      allOf:
+        - $ref: '#/components/schemas/ApiResponse'
+        - type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/PredictionListData'
+
+    # ─── Generation Request Schemas ───
+    LoraConfig:
+      type: object
+      properties:
+        path:
+          type: string
+          description: URL or path to the LoRA weights file.
+        scale:
+          type: number
+          description: Scale factor for LoRA influence. Range 0.0 to 1.0.
+          default: 1.0
+
+    ImageGenerationRequest:
+      type: object
+      required:
+        - prompt
+      properties:
+        prompt:
+          type: string
+          description: Text description of the image to generate.
+        image:
+          type: string
+          description: Source image URL for image-to-image or inpainting mode.
+        mask_image:
+          type: string
+          description: Mask image URL. White areas will be regenerated, black areas preserved.
+        strength:
+          type: number
+          description: Extent to transform the reference image. Range 0.0 to 1.0.
+          default: 0.8
+        size:
+          type: string
+          description: Output dimensions in pixels (width*height format). Each dimension 256-1536.
+          default: '1024*1024'
+        num_inference_steps:
+          type: integer
+          description: Number of inference iterations. Range 1-50.
+          default: 28
+        seed:
+          type: integer
+          description: Random seed. Use -1 for random generation. Range -1 to 2147483647.
+          default: -1
+        guidance_scale:
+          type: number
+          description: Prompt adherence strength. Range 1.0 to 20.0.
+          default: 3.5
+        num_images:
+          type: integer
+          description: Number of images to generate. Range 1-4.
+          default: 1
+        output_format:
+          type: string
+          description: Output image file format.
+          enum:
+            - jpeg
+            - png
+            - webp
+          default: jpeg
+        loras:
+          type: array
+          items:
+            $ref: '#/components/schemas/LoraConfig'
+          description: Array of LoRA configurations to apply.
+        enable_base64_output:
+          type: boolean
+          description: Return BASE64 encoded output instead of URL.
+          default: false
+        enable_sync_mode:
+          type: boolean
+          description: Wait for result before returning the response (synchronous mode).
+          default: false
+
+    VideoGenerationRequest:
+      type: object
+      required:
+        - prompt
+      properties:
+        prompt:
+          type: string
+          description: Text description of the video to generate.
+        image:
+          type: string
+          description: Source image URL for image-to-video generation.
+        size:
+          type: string
+          description: Output video dimensions in pixels (width*height format).
+          default: '1280*720'
+        num_inference_steps:
+          type: integer
+          description: Number of inference iterations.
+          default: 30
+        seed:
+          type: integer
+          description: Random seed. Use -1 for random generation.
+          default: -1
+        guidance_scale:
+          type: number
+          description: Prompt adherence strength.
+          default: 5.0
+        output_format:
+          type: string
+          description: Output video file format.
+          enum:
+            - mp4
+            - gif
+          default: mp4
+        enable_sync_mode:
+          type: boolean
+          description: Wait for result before returning the response.
+          default: false
+
+    # ─── Media Upload ───
+    UploadData:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Classification of the uploaded file.
+          enum:
+            - image
+            - video
+            - audio
+        download_url:
+          type: string
+          description: URL for use in generation requests.
+        filename:
+          type: string
+          description: Original filename.
+        size:
+          type: integer
+          format: int64
+          description: File size in bytes.
+
+    UploadResponse:
+      allOf:
+        - $ref: '#/components/schemas/ApiResponse'
+        - type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/UploadData'
+
+paths:
+  # ─── Image Generation Endpoints ───
+  /wavespeed-ai/flux-dev:
+    post:
+      operationId: generateFluxDev
+      summary: Generate image with FLUX Dev
+      description: Generates an image using the WaveSpeed AI FLUX Dev model. FLUX Dev is a versatile image generation model supporting text-to-image, image-to-image, and inpainting.
+      tags:
+        - ImageGeneration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImageGenerationRequest'
+      responses:
+        '200':
+          description: Task created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+        '400':
+          description: Invalid request parameters.
+        '401':
+          description: Invalid or missing API key.
+        '429':
+          description: Rate limit exceeded.
+
+  /wavespeed-ai/flux-schnell:
+    post:
+      operationId: generateFluxSchnell
+      summary: Generate image with FLUX Schnell
+      description: Generates an image using the fast FLUX Schnell model. Optimized for speed with fewer inference steps.
+      tags:
+        - ImageGeneration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImageGenerationRequest'
+      responses:
+        '200':
+          description: Task created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+        '400':
+          description: Invalid request parameters.
+        '401':
+          description: Invalid or missing API key.
+        '429':
+          description: Rate limit exceeded.
+
+  /wavespeed-ai/flux-dev-ultra:
+    post:
+      operationId: generateFluxDevUltra
+      summary: Generate image with FLUX Dev Ultra
+      description: Generates a high-quality image using the FLUX Dev Ultra model with enhanced quality and detail.
+      tags:
+        - ImageGeneration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImageGenerationRequest'
+      responses:
+        '200':
+          description: Task created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+        '400':
+          description: Invalid request parameters.
+        '401':
+          description: Invalid or missing API key.
+        '429':
+          description: Rate limit exceeded.
+
+  /wavespeed-ai/flux-dev-fast:
+    post:
+      operationId: generateFluxDevFast
+      summary: Generate image with FLUX Dev Fast
+      description: Generates an image using the accelerated FLUX Dev Fast model with WaveSpeed optimization for faster inference.
+      tags:
+        - ImageGeneration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImageGenerationRequest'
+      responses:
+        '200':
+          description: Task created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+        '400':
+          description: Invalid request parameters.
+        '401':
+          description: Invalid or missing API key.
+        '429':
+          description: Rate limit exceeded.
+
+  # ─── Generic Model Endpoint ───
+  /{modelId}:
+    post:
+      operationId: createPrediction
+      summary: Create a prediction with any model
+      description: |
+        Submits a generation task to any model on the WaveSpeed AI platform. The modelId follows
+        the format {provider}/{model-name}, e.g., "wavespeed-ai/flux-dev", "google/imagen-4",
+        "bytedance/seedance-1.0-lite". Returns a task object with an ID for polling.
+      tags:
+        - Predictions
+      parameters:
+        - name: modelId
+          in: path
+          required: true
+          description: Model identifier in the format {provider}/{model-name}.
+          schema:
+            type: string
+        - name: webhook
+          in: query
+          required: false
+          description: Webhook URL to receive the task result when completed.
+          schema:
+            type: string
+            format: uri
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - prompt
+              properties:
+                prompt:
+                  type: string
+                  description: Text prompt describing the desired output.
+                image:
+                  type: string
+                  description: Source image URL for image-to-image, image-to-video, or inpainting.
+                mask_image:
+                  type: string
+                  description: Mask image URL for inpainting (white=regenerate, black=preserve).
+                strength:
+                  type: number
+                  description: Transformation strength for image-to-image. Range 0.0 to 1.0.
+                size:
+                  type: string
+                  description: Output dimensions in width*height format.
+                num_inference_steps:
+                  type: integer
+                  description: Number of inference iterations.
+                seed:
+                  type: integer
+                  description: Random seed (-1 for random).
+                guidance_scale:
+                  type: number
+                  description: Prompt adherence strength.
+                num_images:
+                  type: integer
+                  description: Number of outputs to generate.
+                output_format:
+                  type: string
+                  description: Output file format (jpeg, png, webp, mp4, gif).
+                loras:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/LoraConfig'
+                  description: LoRA configurations to apply.
+                enable_base64_output:
+                  type: boolean
+                  description: Return BASE64 encoded output.
+                  default: false
+                enable_sync_mode:
+                  type: boolean
+                  description: Wait for completion before returning.
+                  default: false
+              additionalProperties: true
+      responses:
+        '200':
+          description: Task created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+        '400':
+          description: Invalid request parameters.
+        '401':
+          description: Invalid or missing API key.
+        '429':
+          description: Rate limit exceeded.
+
+  # ─── Task Result Retrieval ───
+  /predictions/{taskId}/result:
+    get:
+      operationId: getTaskResult
+      summary: Get task result
+      description: |
+        Retrieves the current status and result of a generation task by its ID.
+        Poll this endpoint until status is "completed" or "failed".
+      tags:
+        - Predictions
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          description: The unique task/prediction identifier returned from the generation request.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Task status and result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+        '401':
+          description: Invalid or missing API key.
+        '404':
+          description: Task not found.
+
+  # ─── Prediction History ───
+  /predictions:
+    post:
+      operationId: listPredictions
+      summary: List prediction history
+      description: |
+        Retrieves a paginated list of your prediction history. Includes predictions from both
+        API and web interface. Only data from the past 7 days is available, with a maximum
+        of 100 records per page.
+      tags:
+        - Predictions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - page
+                - page_size
+              properties:
+                page:
+                  type: integer
+                  description: Page number for pagination (starting at 1).
+                  default: 1
+                page_size:
+                  type: integer
+                  description: Number of records per page (1-100).
+                  default: 100
+                model:
+                  type: string
+                  description: Filter by model identifier.
+                status:
+                  type: string
+                  description: Filter by task status.
+                  enum:
+                    - completed
+                    - failed
+                    - processing
+                created_after:
+                  type: string
+                  format: date-time
+                  description: ISO 8601 datetime to filter predictions created after this time.
+                created_before:
+                  type: string
+                  format: date-time
+                  description: ISO 8601 datetime to filter predictions created before this time.
+      responses:
+        '200':
+          description: Prediction history list.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PredictionListResponse'
+        '401':
+          description: Invalid or missing API key.
+
+  # ─── Media Upload ───
+  /media/upload/binary:
+    post:
+      operationId: uploadMedia
+      summary: Upload a media file
+      description: |
+        Uploads an image, video, or audio file to WaveSpeed AI servers. The returned download_url
+        can be used as input for generation models that accept media URLs. Supported formats include
+        JPG, PNG, WebP, GIF, MP4, MOV, MP3, WAV, and more. Files are stored for 7 days.
+        Files exceeding 300MB should be provided via URL instead.
+      tags:
+        - Media
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - file
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: The media file to upload (image, video, or audio).
+      responses:
+        '200':
+          description: File uploaded successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadResponse'
+        '401':
+          description: Invalid or missing API key.
+        '413':
+          description: File too large.
+
+  # ─── Video Generation ───
+  /wavespeed-ai/wan-2.1/wan-2.1-t2v-480p:
+    post:
+      operationId: generateWanTextToVideo480p
+      summary: Generate video with Wan 2.1 Text-to-Video (480p)
+      description: Generates a 480p video from a text prompt using the Wan 2.1 model.
+      tags:
+        - VideoGeneration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VideoGenerationRequest'
+      responses:
+        '200':
+          description: Task created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+        '400':
+          description: Invalid request parameters.
+        '401':
+          description: Invalid or missing API key.
+        '429':
+          description: Rate limit exceeded.
+
+  /wavespeed-ai/wan-2.1/wan-2.1-t2v-720p:
+    post:
+      operationId: generateWanTextToVideo720p
+      summary: Generate video with Wan 2.1 Text-to-Video (720p)
+      description: Generates a 720p video from a text prompt using the Wan 2.1 model.
+      tags:
+        - VideoGeneration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VideoGenerationRequest'
+      responses:
+        '200':
+          description: Task created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+        '400':
+          description: Invalid request parameters.
+        '401':
+          description: Invalid or missing API key.
+        '429':
+          description: Rate limit exceeded.
+
+  /wavespeed-ai/wan-2.1/wan-2.1-i2v-480p:
+    post:
+      operationId: generateWanImageToVideo480p
+      summary: Generate video with Wan 2.1 Image-to-Video (480p)
+      description: Generates a 480p video from an image using the Wan 2.1 model.
+      tags:
+        - VideoGeneration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VideoGenerationRequest'
+      responses:
+        '200':
+          description: Task created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+        '400':
+          description: Invalid request parameters.
+        '401':
+          description: Invalid or missing API key.
+        '429':
+          description: Rate limit exceeded.
+
+  /wavespeed-ai/wan-2.1/wan-2.1-i2v-720p:
+    post:
+      operationId: generateWanImageToVideo720p
+      summary: Generate video with Wan 2.1 Image-to-Video (720p)
+      description: Generates a 720p video from an image using the Wan 2.1 model.
+      tags:
+        - VideoGeneration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VideoGenerationRequest'
+      responses:
+        '200':
+          description: Task created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+        '400':
+          description: Invalid request parameters.
+        '401':
+          description: Invalid or missing API key.
+        '429':
+          description: Rate limit exceeded.
