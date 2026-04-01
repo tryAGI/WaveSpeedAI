@@ -252,7 +252,6 @@ namespace WaveSpeedAI
             global::System.DateTime? createdBefore = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
-
             var __request = new global::WaveSpeedAI.ListPredictionsRequest
             {
                 Page = page,
