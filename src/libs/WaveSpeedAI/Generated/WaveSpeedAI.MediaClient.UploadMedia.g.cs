@@ -274,6 +274,7 @@ namespace WaveSpeedAI
             string filename,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
+
             var __request = new global::WaveSpeedAI.UploadMediaRequest
             {
                 File = file,
