@@ -13,35 +13,35 @@ namespace WaveSpeedAI
         /// 
         /// </summary>
 #if NET6_0_OR_GREATER
-        public global::WaveSpeedAI.ApiResponse? Value1 { get; init; }
+        public global::WaveSpeedAI.ApiResponse? Api { get; init; }
 #else
-        public global::WaveSpeedAI.ApiResponse? Value1 { get; }
+        public global::WaveSpeedAI.ApiResponse? Api { get; }
 #endif
 
         /// <summary>
         /// 
         /// </summary>
 #if NET6_0_OR_GREATER
-        [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, nameof(Value1))]
+        [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, nameof(Api))]
 #endif
-        public bool IsValue1 => Value1 != null;
+        public bool IsApi => Api != null;
 
         /// <summary>
         /// 
         /// </summary>
 #if NET6_0_OR_GREATER
-        public global::WaveSpeedAI.PredictionListResponseVariant2? Value2 { get; init; }
+        public global::WaveSpeedAI.PredictionListResponseVariant2? PredictionListResponseVariant2 { get; init; }
 #else
-        public global::WaveSpeedAI.PredictionListResponseVariant2? Value2 { get; }
+        public global::WaveSpeedAI.PredictionListResponseVariant2? PredictionListResponseVariant2 { get; }
 #endif
 
         /// <summary>
         /// 
         /// </summary>
 #if NET6_0_OR_GREATER
-        [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, nameof(Value2))]
+        [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, nameof(PredictionListResponseVariant2))]
 #endif
-        public bool IsValue2 => Value2 != null;
+        public bool IsPredictionListResponseVariant2 => PredictionListResponseVariant2 != null;
         /// <summary>
         /// 
         /// </summary>
@@ -50,14 +50,14 @@ namespace WaveSpeedAI
         /// <summary>
         /// 
         /// </summary>
-        public static implicit operator global::WaveSpeedAI.ApiResponse?(PredictionListResponse @this) => @this.Value1;
+        public static implicit operator global::WaveSpeedAI.ApiResponse?(PredictionListResponse @this) => @this.Api;
 
         /// <summary>
         /// 
         /// </summary>
         public PredictionListResponse(global::WaveSpeedAI.ApiResponse? value)
         {
-            Value1 = value;
+            Api = value;
         }
 
         /// <summary>
@@ -68,42 +68,42 @@ namespace WaveSpeedAI
         /// <summary>
         /// 
         /// </summary>
-        public static implicit operator global::WaveSpeedAI.PredictionListResponseVariant2?(PredictionListResponse @this) => @this.Value2;
+        public static implicit operator global::WaveSpeedAI.PredictionListResponseVariant2?(PredictionListResponse @this) => @this.PredictionListResponseVariant2;
 
         /// <summary>
         /// 
         /// </summary>
         public PredictionListResponse(global::WaveSpeedAI.PredictionListResponseVariant2? value)
         {
-            Value2 = value;
+            PredictionListResponseVariant2 = value;
         }
 
         /// <summary>
         /// 
         /// </summary>
         public PredictionListResponse(
-            global::WaveSpeedAI.ApiResponse? value1,
-            global::WaveSpeedAI.PredictionListResponseVariant2? value2
+            global::WaveSpeedAI.ApiResponse? api,
+            global::WaveSpeedAI.PredictionListResponseVariant2? predictionListResponseVariant2
             )
         {
-            Value1 = value1;
-            Value2 = value2;
+            Api = api;
+            PredictionListResponseVariant2 = predictionListResponseVariant2;
         }
 
         /// <summary>
         /// 
         /// </summary>
         public object? Object =>
-            Value2 as object ??
-            Value1 as object 
+            PredictionListResponseVariant2 as object ??
+            Api as object 
             ;
 
         /// <summary>
         /// 
         /// </summary>
         public override string? ToString() =>
-            Value1?.ToString() ??
-            Value2?.ToString() 
+            Api?.ToString() ??
+            PredictionListResponseVariant2?.ToString() 
             ;
 
         /// <summary>
@@ -111,15 +111,15 @@ namespace WaveSpeedAI
         /// </summary>
         public bool Validate()
         {
-            return IsValue1 && IsValue2;
+            return IsApi && IsPredictionListResponseVariant2;
         }
 
         /// <summary>
         /// 
         /// </summary>
         public TResult? Match<TResult>(
-            global::System.Func<global::WaveSpeedAI.ApiResponse?, TResult>? value1 = null,
-            global::System.Func<global::WaveSpeedAI.PredictionListResponseVariant2?, TResult>? value2 = null,
+            global::System.Func<global::WaveSpeedAI.ApiResponse?, TResult>? api = null,
+            global::System.Func<global::WaveSpeedAI.PredictionListResponseVariant2?, TResult>? predictionListResponseVariant2 = null,
             bool validate = true)
         {
             if (validate)
@@ -127,13 +127,13 @@ namespace WaveSpeedAI
                 Validate();
             }
 
-            if (IsValue1 && value1 != null)
+            if (IsApi && api != null)
             {
-                return value1(Value1!);
+                return api(Api!);
             }
-            else if (IsValue2 && value2 != null)
+            else if (IsPredictionListResponseVariant2 && predictionListResponseVariant2 != null)
             {
-                return value2(Value2!);
+                return predictionListResponseVariant2(PredictionListResponseVariant2!);
             }
 
             return default(TResult);
@@ -143,8 +143,8 @@ namespace WaveSpeedAI
         /// 
         /// </summary>
         public void Match(
-            global::System.Action<global::WaveSpeedAI.ApiResponse?>? value1 = null,
-            global::System.Action<global::WaveSpeedAI.PredictionListResponseVariant2?>? value2 = null,
+            global::System.Action<global::WaveSpeedAI.ApiResponse?>? api = null,
+            global::System.Action<global::WaveSpeedAI.PredictionListResponseVariant2?>? predictionListResponseVariant2 = null,
             bool validate = true)
         {
             if (validate)
@@ -152,13 +152,13 @@ namespace WaveSpeedAI
                 Validate();
             }
 
-            if (IsValue1)
+            if (IsApi)
             {
-                value1?.Invoke(Value1!);
+                api?.Invoke(Api!);
             }
-            else if (IsValue2)
+            else if (IsPredictionListResponseVariant2)
             {
-                value2?.Invoke(Value2!);
+                predictionListResponseVariant2?.Invoke(PredictionListResponseVariant2!);
             }
         }
 
@@ -169,9 +169,9 @@ namespace WaveSpeedAI
         {
             var fields = new object?[]
             {
-                Value1,
+                Api,
                 typeof(global::WaveSpeedAI.ApiResponse),
-                Value2,
+                PredictionListResponseVariant2,
                 typeof(global::WaveSpeedAI.PredictionListResponseVariant2),
             };
             const int offset = unchecked((int)2166136261);
@@ -189,8 +189,8 @@ namespace WaveSpeedAI
         public bool Equals(PredictionListResponse other)
         {
             return
-                global::System.Collections.Generic.EqualityComparer<global::WaveSpeedAI.ApiResponse?>.Default.Equals(Value1, other.Value1) &&
-                global::System.Collections.Generic.EqualityComparer<global::WaveSpeedAI.PredictionListResponseVariant2?>.Default.Equals(Value2, other.Value2) 
+                global::System.Collections.Generic.EqualityComparer<global::WaveSpeedAI.ApiResponse?>.Default.Equals(Api, other.Api) &&
+                global::System.Collections.Generic.EqualityComparer<global::WaveSpeedAI.PredictionListResponseVariant2?>.Default.Equals(PredictionListResponseVariant2, other.PredictionListResponseVariant2) 
                 ;
         }
 
