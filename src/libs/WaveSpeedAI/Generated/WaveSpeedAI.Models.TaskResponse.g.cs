@@ -13,35 +13,35 @@ namespace WaveSpeedAI
         /// 
         /// </summary>
 #if NET6_0_OR_GREATER
-        public global::WaveSpeedAI.ApiResponse? Value1 { get; init; }
+        public global::WaveSpeedAI.ApiResponse? Api { get; init; }
 #else
-        public global::WaveSpeedAI.ApiResponse? Value1 { get; }
+        public global::WaveSpeedAI.ApiResponse? Api { get; }
 #endif
 
         /// <summary>
         /// 
         /// </summary>
 #if NET6_0_OR_GREATER
-        [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, nameof(Value1))]
+        [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, nameof(Api))]
 #endif
-        public bool IsValue1 => Value1 != null;
+        public bool IsApi => Api != null;
 
         /// <summary>
         /// 
         /// </summary>
 #if NET6_0_OR_GREATER
-        public global::WaveSpeedAI.TaskResponseVariant2? Value2 { get; init; }
+        public global::WaveSpeedAI.TaskResponseVariant2? TaskResponseVariant2 { get; init; }
 #else
-        public global::WaveSpeedAI.TaskResponseVariant2? Value2 { get; }
+        public global::WaveSpeedAI.TaskResponseVariant2? TaskResponseVariant2 { get; }
 #endif
 
         /// <summary>
         /// 
         /// </summary>
 #if NET6_0_OR_GREATER
-        [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, nameof(Value2))]
+        [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, nameof(TaskResponseVariant2))]
 #endif
-        public bool IsValue2 => Value2 != null;
+        public bool IsTaskResponseVariant2 => TaskResponseVariant2 != null;
         /// <summary>
         /// 
         /// </summary>
@@ -50,14 +50,14 @@ namespace WaveSpeedAI
         /// <summary>
         /// 
         /// </summary>
-        public static implicit operator global::WaveSpeedAI.ApiResponse?(TaskResponse @this) => @this.Value1;
+        public static implicit operator global::WaveSpeedAI.ApiResponse?(TaskResponse @this) => @this.Api;
 
         /// <summary>
         /// 
         /// </summary>
         public TaskResponse(global::WaveSpeedAI.ApiResponse? value)
         {
-            Value1 = value;
+            Api = value;
         }
 
         /// <summary>
@@ -68,42 +68,42 @@ namespace WaveSpeedAI
         /// <summary>
         /// 
         /// </summary>
-        public static implicit operator global::WaveSpeedAI.TaskResponseVariant2?(TaskResponse @this) => @this.Value2;
+        public static implicit operator global::WaveSpeedAI.TaskResponseVariant2?(TaskResponse @this) => @this.TaskResponseVariant2;
 
         /// <summary>
         /// 
         /// </summary>
         public TaskResponse(global::WaveSpeedAI.TaskResponseVariant2? value)
         {
-            Value2 = value;
+            TaskResponseVariant2 = value;
         }
 
         /// <summary>
         /// 
         /// </summary>
         public TaskResponse(
-            global::WaveSpeedAI.ApiResponse? value1,
-            global::WaveSpeedAI.TaskResponseVariant2? value2
+            global::WaveSpeedAI.ApiResponse? api,
+            global::WaveSpeedAI.TaskResponseVariant2? taskResponseVariant2
             )
         {
-            Value1 = value1;
-            Value2 = value2;
+            Api = api;
+            TaskResponseVariant2 = taskResponseVariant2;
         }
 
         /// <summary>
         /// 
         /// </summary>
         public object? Object =>
-            Value2 as object ??
-            Value1 as object 
+            TaskResponseVariant2 as object ??
+            Api as object 
             ;
 
         /// <summary>
         /// 
         /// </summary>
         public override string? ToString() =>
-            Value1?.ToString() ??
-            Value2?.ToString() 
+            Api?.ToString() ??
+            TaskResponseVariant2?.ToString() 
             ;
 
         /// <summary>
@@ -111,15 +111,15 @@ namespace WaveSpeedAI
         /// </summary>
         public bool Validate()
         {
-            return IsValue1 && IsValue2;
+            return IsApi && IsTaskResponseVariant2;
         }
 
         /// <summary>
         /// 
         /// </summary>
         public TResult? Match<TResult>(
-            global::System.Func<global::WaveSpeedAI.ApiResponse?, TResult>? value1 = null,
-            global::System.Func<global::WaveSpeedAI.TaskResponseVariant2?, TResult>? value2 = null,
+            global::System.Func<global::WaveSpeedAI.ApiResponse?, TResult>? api = null,
+            global::System.Func<global::WaveSpeedAI.TaskResponseVariant2?, TResult>? taskResponseVariant2 = null,
             bool validate = true)
         {
             if (validate)
@@ -127,13 +127,13 @@ namespace WaveSpeedAI
                 Validate();
             }
 
-            if (IsValue1 && value1 != null)
+            if (IsApi && api != null)
             {
-                return value1(Value1!);
+                return api(Api!);
             }
-            else if (IsValue2 && value2 != null)
+            else if (IsTaskResponseVariant2 && taskResponseVariant2 != null)
             {
-                return value2(Value2!);
+                return taskResponseVariant2(TaskResponseVariant2!);
             }
 
             return default(TResult);
@@ -143,8 +143,8 @@ namespace WaveSpeedAI
         /// 
         /// </summary>
         public void Match(
-            global::System.Action<global::WaveSpeedAI.ApiResponse?>? value1 = null,
-            global::System.Action<global::WaveSpeedAI.TaskResponseVariant2?>? value2 = null,
+            global::System.Action<global::WaveSpeedAI.ApiResponse?>? api = null,
+            global::System.Action<global::WaveSpeedAI.TaskResponseVariant2?>? taskResponseVariant2 = null,
             bool validate = true)
         {
             if (validate)
@@ -152,13 +152,13 @@ namespace WaveSpeedAI
                 Validate();
             }
 
-            if (IsValue1)
+            if (IsApi)
             {
-                value1?.Invoke(Value1!);
+                api?.Invoke(Api!);
             }
-            else if (IsValue2)
+            else if (IsTaskResponseVariant2)
             {
-                value2?.Invoke(Value2!);
+                taskResponseVariant2?.Invoke(TaskResponseVariant2!);
             }
         }
 
@@ -169,9 +169,9 @@ namespace WaveSpeedAI
         {
             var fields = new object?[]
             {
-                Value1,
+                Api,
                 typeof(global::WaveSpeedAI.ApiResponse),
-                Value2,
+                TaskResponseVariant2,
                 typeof(global::WaveSpeedAI.TaskResponseVariant2),
             };
             const int offset = unchecked((int)2166136261);
@@ -189,8 +189,8 @@ namespace WaveSpeedAI
         public bool Equals(TaskResponse other)
         {
             return
-                global::System.Collections.Generic.EqualityComparer<global::WaveSpeedAI.ApiResponse?>.Default.Equals(Value1, other.Value1) &&
-                global::System.Collections.Generic.EqualityComparer<global::WaveSpeedAI.TaskResponseVariant2?>.Default.Equals(Value2, other.Value2) 
+                global::System.Collections.Generic.EqualityComparer<global::WaveSpeedAI.ApiResponse?>.Default.Equals(Api, other.Api) &&
+                global::System.Collections.Generic.EqualityComparer<global::WaveSpeedAI.TaskResponseVariant2?>.Default.Equals(TaskResponseVariant2, other.TaskResponseVariant2) 
                 ;
         }
 
