@@ -6,6 +6,7 @@ namespace WaveSpeedAI
     public sealed partial class WaveSpeedAIClient
     {
         /// <inheritdoc cref="WaveSpeedAIClient(global::System.Net.Http.HttpClient?, global::System.Uri?, global::System.Collections.Generic.List{global::WaveSpeedAI.EndPointAuthorization}?, bool)"/>
+
         public WaveSpeedAIClient(
             string apiKey,
             global::System.Net.Http.HttpClient? httpClient = null,

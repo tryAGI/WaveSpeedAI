@@ -5,6 +5,25 @@ namespace WaveSpeedAI
 {
     public partial class PredictionsClient
     {
+
+
+        private static readonly global::WaveSpeedAI.EndPointSecurityRequirement s_GetTaskResultSecurityRequirement0 =
+            new global::WaveSpeedAI.EndPointSecurityRequirement
+            {
+                Authorizations = new global::WaveSpeedAI.EndPointAuthorizationRequirement[]
+                {                    new global::WaveSpeedAI.EndPointAuthorizationRequirement
+                    {
+                        Type = "Http",
+                        Location = "Header",
+                        Name = "Bearer",
+                        FriendlyName = "Bearer",
+                    },
+                },
+            };
+        private static readonly global::WaveSpeedAI.EndPointSecurityRequirement[] s_GetTaskResultSecurityRequirements =
+            new global::WaveSpeedAI.EndPointSecurityRequirement[]
+            {                s_GetTaskResultSecurityRequirement0,
+            };
         partial void PrepareGetTaskResultArguments(
             global::System.Net.Http.HttpClient httpClient,
             ref string taskId);
@@ -39,9 +58,15 @@ namespace WaveSpeedAI
                 httpClient: HttpClient,
                 taskId: ref taskId);
 
+
+            var __authorizations = global::WaveSpeedAI.EndPointSecurityResolver.ResolveAuthorizations(
+                availableAuthorizations: Authorizations,
+                securityRequirements: s_GetTaskResultSecurityRequirements,
+                operationName: "GetTaskResultAsync");
+
             var __pathBuilder = new global::WaveSpeedAI.PathBuilder(
                 path: $"/predictions/{taskId}/result",
-                baseUri: HttpClient.BaseAddress); 
+                baseUri: HttpClient.BaseAddress);
             var __path = __pathBuilder.ToString();
             using var __httpRequest = new global::System.Net.Http.HttpRequestMessage(
                 method: global::System.Net.Http.HttpMethod.Get,
@@ -51,7 +76,7 @@ namespace WaveSpeedAI
             __httpRequest.VersionPolicy = global::System.Net.Http.HttpVersionPolicy.RequestVersionOrHigher;
 #endif
 
-            foreach (var __authorization in Authorizations)
+            foreach (var __authorization in __authorizations)
             {
                 if (__authorization.Type == "Http" ||
                     __authorization.Type == "OAuth2")

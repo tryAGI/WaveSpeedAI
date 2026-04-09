@@ -5,6 +5,25 @@ namespace WaveSpeedAI
 {
     public partial class VideoGenerationClient
     {
+
+
+        private static readonly global::WaveSpeedAI.EndPointSecurityRequirement s_GenerateWanTextToVideo720pSecurityRequirement0 =
+            new global::WaveSpeedAI.EndPointSecurityRequirement
+            {
+                Authorizations = new global::WaveSpeedAI.EndPointAuthorizationRequirement[]
+                {                    new global::WaveSpeedAI.EndPointAuthorizationRequirement
+                    {
+                        Type = "Http",
+                        Location = "Header",
+                        Name = "Bearer",
+                        FriendlyName = "Bearer",
+                    },
+                },
+            };
+        private static readonly global::WaveSpeedAI.EndPointSecurityRequirement[] s_GenerateWanTextToVideo720pSecurityRequirements =
+            new global::WaveSpeedAI.EndPointSecurityRequirement[]
+            {                s_GenerateWanTextToVideo720pSecurityRequirement0,
+            };
         partial void PrepareGenerateWanTextToVideo720pArguments(
             global::System.Net.Http.HttpClient httpClient,
             global::WaveSpeedAI.VideoGenerationRequest request);
@@ -41,9 +60,15 @@ namespace WaveSpeedAI
                 httpClient: HttpClient,
                 request: request);
 
+
+            var __authorizations = global::WaveSpeedAI.EndPointSecurityResolver.ResolveAuthorizations(
+                availableAuthorizations: Authorizations,
+                securityRequirements: s_GenerateWanTextToVideo720pSecurityRequirements,
+                operationName: "GenerateWanTextToVideo720pAsync");
+
             var __pathBuilder = new global::WaveSpeedAI.PathBuilder(
                 path: "/wavespeed-ai/wan-2.1/wan-2.1-t2v-720p",
-                baseUri: HttpClient.BaseAddress); 
+                baseUri: HttpClient.BaseAddress);
             var __path = __pathBuilder.ToString();
             using var __httpRequest = new global::System.Net.Http.HttpRequestMessage(
                 method: global::System.Net.Http.HttpMethod.Post,
@@ -53,7 +78,7 @@ namespace WaveSpeedAI
             __httpRequest.VersionPolicy = global::System.Net.Http.HttpVersionPolicy.RequestVersionOrHigher;
 #endif
 
-            foreach (var __authorization in Authorizations)
+            foreach (var __authorization in __authorizations)
             {
                 if (__authorization.Type == "Http" ||
                     __authorization.Type == "OAuth2")
