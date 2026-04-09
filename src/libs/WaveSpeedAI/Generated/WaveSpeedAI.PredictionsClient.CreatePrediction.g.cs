@@ -5,6 +5,25 @@ namespace WaveSpeedAI
 {
     public partial class PredictionsClient
     {
+
+
+        private static readonly global::WaveSpeedAI.EndPointSecurityRequirement s_CreatePredictionSecurityRequirement0 =
+            new global::WaveSpeedAI.EndPointSecurityRequirement
+            {
+                Authorizations = new global::WaveSpeedAI.EndPointAuthorizationRequirement[]
+                {                    new global::WaveSpeedAI.EndPointAuthorizationRequirement
+                    {
+                        Type = "Http",
+                        Location = "Header",
+                        Name = "Bearer",
+                        FriendlyName = "Bearer",
+                    },
+                },
+            };
+        private static readonly global::WaveSpeedAI.EndPointSecurityRequirement[] s_CreatePredictionSecurityRequirements =
+            new global::WaveSpeedAI.EndPointSecurityRequirement[]
+            {                s_CreatePredictionSecurityRequirement0,
+            };
         partial void PrepareCreatePredictionArguments(
             global::System.Net.Http.HttpClient httpClient,
             ref string modelId,
@@ -53,12 +72,18 @@ namespace WaveSpeedAI
                 webhook: ref webhook,
                 request: request);
 
+
+            var __authorizations = global::WaveSpeedAI.EndPointSecurityResolver.ResolveAuthorizations(
+                availableAuthorizations: Authorizations,
+                securityRequirements: s_CreatePredictionSecurityRequirements,
+                operationName: "CreatePredictionAsync");
+
             var __pathBuilder = new global::WaveSpeedAI.PathBuilder(
                 path: $"/{modelId}",
                 baseUri: HttpClient.BaseAddress); 
             __pathBuilder
                 .AddOptionalParameter("webhook", webhook) 
-                ; 
+                ;
             var __path = __pathBuilder.ToString();
             using var __httpRequest = new global::System.Net.Http.HttpRequestMessage(
                 method: global::System.Net.Http.HttpMethod.Post,
@@ -68,7 +93,7 @@ namespace WaveSpeedAI
             __httpRequest.VersionPolicy = global::System.Net.Http.HttpVersionPolicy.RequestVersionOrHigher;
 #endif
 
-            foreach (var __authorization in Authorizations)
+            foreach (var __authorization in __authorizations)
             {
                 if (__authorization.Type == "Http" ||
                     __authorization.Type == "OAuth2")
