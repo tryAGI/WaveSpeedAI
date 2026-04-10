@@ -11,11 +11,13 @@ namespace WaveSpeedAI
         /// of 100 records per page.
         /// </summary>
         /// <param name="request"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::WaveSpeedAI.ApiException"></exception>
         global::System.Threading.Tasks.Task<global::WaveSpeedAI.PredictionListResponse> ListPredictionsAsync(
 
             global::WaveSpeedAI.ListPredictionsRequest request,
+            global::WaveSpeedAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// List prediction history<br/>
@@ -43,6 +45,7 @@ namespace WaveSpeedAI
         /// <param name="createdBefore">
         /// ISO 8601 datetime to filter predictions created before this time.
         /// </param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::System.InvalidOperationException"></exception>
         global::System.Threading.Tasks.Task<global::WaveSpeedAI.PredictionListResponse> ListPredictionsAsync(
@@ -52,6 +55,7 @@ namespace WaveSpeedAI
             global::WaveSpeedAI.ListPredictionsRequestStatus? status = default,
             global::System.DateTime? createdAfter = default,
             global::System.DateTime? createdBefore = default,
+            global::WaveSpeedAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
     }
 }

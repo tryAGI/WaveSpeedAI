@@ -12,11 +12,13 @@ namespace WaveSpeedAI
         /// Files exceeding 300MB should be provided via URL instead.
         /// </summary>
         /// <param name="request"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::WaveSpeedAI.ApiException"></exception>
         global::System.Threading.Tasks.Task<global::WaveSpeedAI.UploadResponse> UploadMediaAsync(
 
             global::WaveSpeedAI.UploadMediaRequest request,
+            global::WaveSpeedAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Upload a media file<br/>
@@ -31,11 +33,13 @@ namespace WaveSpeedAI
         /// <param name="filename">
         /// The media file to upload (image, video, or audio).
         /// </param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::System.InvalidOperationException"></exception>
         global::System.Threading.Tasks.Task<global::WaveSpeedAI.UploadResponse> UploadMediaAsync(
             byte[] file,
             string filename,
+            global::WaveSpeedAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
     }
 }

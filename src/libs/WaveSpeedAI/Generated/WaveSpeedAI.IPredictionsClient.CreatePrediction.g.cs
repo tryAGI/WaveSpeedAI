@@ -13,6 +13,7 @@ namespace WaveSpeedAI
         /// <param name="modelId"></param>
         /// <param name="webhook"></param>
         /// <param name="request"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::WaveSpeedAI.ApiException"></exception>
         global::System.Threading.Tasks.Task<global::WaveSpeedAI.TaskResponse> CreatePredictionAsync(
@@ -20,6 +21,7 @@ namespace WaveSpeedAI
 
             global::WaveSpeedAI.CreatePredictionRequest request,
             string? webhook = default,
+            global::WaveSpeedAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Create a prediction with any model<br/>
@@ -70,6 +72,7 @@ namespace WaveSpeedAI
         /// Wait for completion before returning.<br/>
         /// Default Value: false
         /// </param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::System.InvalidOperationException"></exception>
         global::System.Threading.Tasks.Task<global::WaveSpeedAI.TaskResponse> CreatePredictionAsync(
@@ -88,6 +91,7 @@ namespace WaveSpeedAI
             global::System.Collections.Generic.IList<global::WaveSpeedAI.LoraConfig>? loras = default,
             bool? enableBase64Output = default,
             bool? enableSyncMode = default,
+            global::WaveSpeedAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
     }
 }

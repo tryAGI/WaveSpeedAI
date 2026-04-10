@@ -9,11 +9,13 @@ namespace WaveSpeedAI
         /// Generates an image using the accelerated FLUX Dev Fast model with WaveSpeed optimization for faster inference.
         /// </summary>
         /// <param name="request"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::WaveSpeedAI.ApiException"></exception>
         global::System.Threading.Tasks.Task<global::WaveSpeedAI.TaskResponse> GenerateFluxDevFastAsync(
 
             global::WaveSpeedAI.ImageGenerationRequest request,
+            global::WaveSpeedAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Generate image with FLUX Dev Fast<br/>
@@ -67,6 +69,7 @@ namespace WaveSpeedAI
         /// Wait for result before returning the response (synchronous mode).<br/>
         /// Default Value: false
         /// </param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::System.InvalidOperationException"></exception>
         global::System.Threading.Tasks.Task<global::WaveSpeedAI.TaskResponse> GenerateFluxDevFastAsync(
@@ -83,6 +86,7 @@ namespace WaveSpeedAI
             global::System.Collections.Generic.IList<global::WaveSpeedAI.LoraConfig>? loras = default,
             bool? enableBase64Output = default,
             bool? enableSyncMode = default,
+            global::WaveSpeedAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
     }
 }

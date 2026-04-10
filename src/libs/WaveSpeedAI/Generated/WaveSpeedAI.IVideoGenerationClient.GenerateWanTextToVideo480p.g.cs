@@ -9,11 +9,13 @@ namespace WaveSpeedAI
         /// Generates a 480p video from a text prompt using the Wan 2.1 model.
         /// </summary>
         /// <param name="request"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::WaveSpeedAI.ApiException"></exception>
         global::System.Threading.Tasks.Task<global::WaveSpeedAI.TaskResponse> GenerateWanTextToVideo480pAsync(
 
             global::WaveSpeedAI.VideoGenerationRequest request,
+            global::WaveSpeedAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Generate video with Wan 2.1 Text-to-Video (480p)<br/>
@@ -49,6 +51,7 @@ namespace WaveSpeedAI
         /// Wait for result before returning the response.<br/>
         /// Default Value: false
         /// </param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::System.InvalidOperationException"></exception>
         global::System.Threading.Tasks.Task<global::WaveSpeedAI.TaskResponse> GenerateWanTextToVideo480pAsync(
@@ -60,6 +63,7 @@ namespace WaveSpeedAI
             double? guidanceScale = default,
             global::WaveSpeedAI.VideoGenerationRequestOutputFormat? outputFormat = default,
             bool? enableSyncMode = default,
+            global::WaveSpeedAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
     }
 }
