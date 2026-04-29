@@ -149,7 +149,7 @@ namespace WaveSpeedAI
                 PrepareCreatePredictionRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
-                    modelId: modelId,
+                    modelId: modelId!,
                     webhook: webhook,
                     request: request);
 
