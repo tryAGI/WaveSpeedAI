@@ -21,6 +21,19 @@ namespace WaveSpeedAI
         /// Generate image with FLUX Dev Ultra<br/>
         /// Generates a high-quality image using the FLUX Dev Ultra model with enhanced quality and detail.
         /// </summary>
+        /// <param name="request"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
+        /// <param name="cancellationToken">The token to cancel the operation with</param>
+        /// <exception cref="global::WaveSpeedAI.ApiException"></exception>
+        global::System.Threading.Tasks.Task<global::WaveSpeedAI.AutoSDKHttpResponse<global::WaveSpeedAI.TaskResponse>> GenerateFluxDevUltraAsResponseAsync(
+
+            global::WaveSpeedAI.ImageGenerationRequest request,
+            global::WaveSpeedAI.AutoSDKRequestOptions? requestOptions = default,
+            global::System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Generate image with FLUX Dev Ultra<br/>
+        /// Generates a high-quality image using the FLUX Dev Ultra model with enhanced quality and detail.
+        /// </summary>
         /// <param name="prompt">
         /// Text description of the image to generate.
         /// </param>

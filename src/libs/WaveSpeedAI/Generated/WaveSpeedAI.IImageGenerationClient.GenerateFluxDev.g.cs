@@ -21,6 +21,19 @@ namespace WaveSpeedAI
         /// Generate image with FLUX Dev<br/>
         /// Generates an image using the WaveSpeed AI FLUX Dev model. FLUX Dev is a versatile image generation model supporting text-to-image, image-to-image, and inpainting.
         /// </summary>
+        /// <param name="request"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
+        /// <param name="cancellationToken">The token to cancel the operation with</param>
+        /// <exception cref="global::WaveSpeedAI.ApiException"></exception>
+        global::System.Threading.Tasks.Task<global::WaveSpeedAI.AutoSDKHttpResponse<global::WaveSpeedAI.TaskResponse>> GenerateFluxDevAsResponseAsync(
+
+            global::WaveSpeedAI.ImageGenerationRequest request,
+            global::WaveSpeedAI.AutoSDKRequestOptions? requestOptions = default,
+            global::System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Generate image with FLUX Dev<br/>
+        /// Generates an image using the WaveSpeed AI FLUX Dev model. FLUX Dev is a versatile image generation model supporting text-to-image, image-to-image, and inpainting.
+        /// </summary>
         /// <param name="prompt">
         /// Text description of the image to generate.
         /// </param>

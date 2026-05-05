@@ -55,6 +55,28 @@ namespace WaveSpeedAI
             global::WaveSpeedAI.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
+            var __response = await GetTaskResultAsResponseAsync(
+                taskId: taskId,
+                requestOptions: requestOptions,
+                cancellationToken: cancellationToken
+            ).ConfigureAwait(false);
+
+            return __response.Body;
+        }
+        /// <summary>
+        /// Get task result<br/>
+        /// Retrieves the current status and result of a generation task by its ID.<br/>
+        /// Poll this endpoint until status is "completed" or "failed".
+        /// </summary>
+        /// <param name="taskId"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
+        /// <param name="cancellationToken">The token to cancel the operation with</param>
+        /// <exception cref="global::WaveSpeedAI.ApiException"></exception>
+        public async global::System.Threading.Tasks.Task<global::WaveSpeedAI.AutoSDKHttpResponse<global::WaveSpeedAI.TaskResponse>> GetTaskResultAsResponseAsync(
+            string taskId,
+            global::WaveSpeedAI.AutoSDKRequestOptions? requestOptions = default,
+            global::System.Threading.CancellationToken cancellationToken = default)
+        {
             PrepareArguments(
                 client: HttpClient);
             PrepareGetTaskResultArguments(
@@ -83,6 +105,7 @@ namespace WaveSpeedAI
 
             global::System.Net.Http.HttpRequestMessage __CreateHttpRequest()
             {
+
                             var __pathBuilder = new global::WaveSpeedAI.PathBuilder(
                                 path: $"/predictions/{taskId}/result",
                                 baseUri: HttpClient.BaseAddress);
@@ -156,6 +179,8 @@ namespace WaveSpeedAI
                                 attempt: __attempt,
                                 maxAttempts: __maxAttempts,
                                 willRetry: false,
+                                retryDelay: null,
+                                retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                     try
                     {
@@ -166,6 +191,11 @@ namespace WaveSpeedAI
                     }
                     catch (global::System.Net.Http.HttpRequestException __exception)
                     {
+                        var __retryDelay = global::WaveSpeedAI.AutoSDKRequestOptionsSupport.GetRetryDelay(
+                            clientOptions: Options,
+                            requestOptions: requestOptions,
+                            response: null,
+                            attempt: __attempt);
                         var __willRetry = __attempt < __maxAttempts && !__effectiveCancellationToken.IsCancellationRequested;
                         await global::WaveSpeedAI.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
@@ -183,6 +213,8 @@ namespace WaveSpeedAI
                                 attempt: __attempt,
                                 maxAttempts: __maxAttempts,
                                 willRetry: __willRetry,
+                                retryDelay: __willRetry ? __retryDelay : (global::System.TimeSpan?)null,
+                                retryReason: "exception",
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                         if (!__willRetry)
                         {
@@ -192,8 +224,7 @@ namespace WaveSpeedAI
                         __httpRequest.Dispose();
                         __httpRequest = null;
                         await global::WaveSpeedAI.AutoSDKRequestOptionsSupport.DelayBeforeRetryAsync(
-                            clientOptions: Options,
-                            requestOptions: requestOptions,
+                            retryDelay: __retryDelay,
                             cancellationToken: __effectiveCancellationToken).ConfigureAwait(false);
                         continue;
                     }
@@ -202,6 +233,11 @@ namespace WaveSpeedAI
                         __attempt < __maxAttempts &&
                         global::WaveSpeedAI.AutoSDKRequestOptionsSupport.ShouldRetryStatusCode(__response.StatusCode))
                     {
+                        var __retryDelay = global::WaveSpeedAI.AutoSDKRequestOptionsSupport.GetRetryDelay(
+                            clientOptions: Options,
+                            requestOptions: requestOptions,
+                            response: __response,
+                            attempt: __attempt);
                         await global::WaveSpeedAI.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::WaveSpeedAI.AutoSDKRequestOptionsSupport.CreateHookContext(
@@ -218,14 +254,15 @@ namespace WaveSpeedAI
                                 attempt: __attempt,
                                 maxAttempts: __maxAttempts,
                                 willRetry: true,
+                                retryDelay: __retryDelay,
+                                retryReason: "status:" + ((int)__response.StatusCode).ToString(global::System.Globalization.CultureInfo.InvariantCulture),
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                         __response.Dispose();
                         __response = null;
                         __httpRequest.Dispose();
                         __httpRequest = null;
                         await global::WaveSpeedAI.AutoSDKRequestOptionsSupport.DelayBeforeRetryAsync(
-                            clientOptions: Options,
-                            requestOptions: requestOptions,
+                            retryDelay: __retryDelay,
                             cancellationToken: __effectiveCancellationToken).ConfigureAwait(false);
                         continue;
                     }
@@ -265,6 +302,8 @@ namespace WaveSpeedAI
                                 attempt: __attemptNumber,
                                 maxAttempts: __maxAttempts,
                                 willRetry: false,
+                                retryDelay: null,
+                                retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                 }
                 else
@@ -285,6 +324,8 @@ namespace WaveSpeedAI
                                 attempt: __attemptNumber,
                                 maxAttempts: __maxAttempts,
                                 willRetry: false,
+                                retryDelay: null,
+                                retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                 }
                             // 
@@ -375,9 +416,13 @@ namespace WaveSpeedAI
                                 {
                                     __response.EnsureSuccessStatusCode();
 
-                                    return
-                                        global::WaveSpeedAI.TaskResponse.FromJson(__content, JsonSerializerContext) ??
+                                    var __value = global::WaveSpeedAI.TaskResponse.FromJson(__content, JsonSerializerContext) ??
                                         throw new global::System.InvalidOperationException($"Response deserialization failed for \"{__content}\" ");
+                                    return new global::WaveSpeedAI.AutoSDKHttpResponse<global::WaveSpeedAI.TaskResponse>(
+                                        statusCode: __response.StatusCode,
+                                        headers: global::WaveSpeedAI.AutoSDKHttpResponse.CreateHeaders(__response),
+                                        requestUri: __response.RequestMessage?.RequestUri,
+                                        body: __value);
                                 }
                                 catch (global::System.Exception __ex)
                                 {
@@ -405,9 +450,13 @@ namespace WaveSpeedAI
                 #endif
                                     ).ConfigureAwait(false);
 
-                                    return
-                                        await global::WaveSpeedAI.TaskResponse.FromJsonStreamAsync(__content, JsonSerializerContext).ConfigureAwait(false) ??
+                                    var __value = await global::WaveSpeedAI.TaskResponse.FromJsonStreamAsync(__content, JsonSerializerContext).ConfigureAwait(false) ??
                                         throw new global::System.InvalidOperationException("Response deserialization failed.");
+                                    return new global::WaveSpeedAI.AutoSDKHttpResponse<global::WaveSpeedAI.TaskResponse>(
+                                        statusCode: __response.StatusCode,
+                                        headers: global::WaveSpeedAI.AutoSDKHttpResponse.CreateHeaders(__response),
+                                        requestUri: __response.RequestMessage?.RequestUri,
+                                        body: __value);
                                 }
                                 catch (global::System.Exception __ex)
                                 {

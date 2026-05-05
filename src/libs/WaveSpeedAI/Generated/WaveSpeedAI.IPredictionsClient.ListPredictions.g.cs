@@ -25,6 +25,21 @@ namespace WaveSpeedAI
         /// API and web interface. Only data from the past 7 days is available, with a maximum<br/>
         /// of 100 records per page.
         /// </summary>
+        /// <param name="request"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
+        /// <param name="cancellationToken">The token to cancel the operation with</param>
+        /// <exception cref="global::WaveSpeedAI.ApiException"></exception>
+        global::System.Threading.Tasks.Task<global::WaveSpeedAI.AutoSDKHttpResponse<global::WaveSpeedAI.PredictionListResponse>> ListPredictionsAsResponseAsync(
+
+            global::WaveSpeedAI.ListPredictionsRequest request,
+            global::WaveSpeedAI.AutoSDKRequestOptions? requestOptions = default,
+            global::System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
+        /// List prediction history<br/>
+        /// Retrieves a paginated list of your prediction history. Includes predictions from both<br/>
+        /// API and web interface. Only data from the past 7 days is available, with a maximum<br/>
+        /// of 100 records per page.
+        /// </summary>
         /// <param name="page">
         /// Page number for pagination (starting at 1).<br/>
         /// Default Value: 1

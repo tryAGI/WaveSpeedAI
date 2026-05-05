@@ -21,6 +21,19 @@ namespace WaveSpeedAI
         /// Generate video with Wan 2.1 Text-to-Video (480p)<br/>
         /// Generates a 480p video from a text prompt using the Wan 2.1 model.
         /// </summary>
+        /// <param name="request"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
+        /// <param name="cancellationToken">The token to cancel the operation with</param>
+        /// <exception cref="global::WaveSpeedAI.ApiException"></exception>
+        global::System.Threading.Tasks.Task<global::WaveSpeedAI.AutoSDKHttpResponse<global::WaveSpeedAI.TaskResponse>> GenerateWanTextToVideo480pAsResponseAsync(
+
+            global::WaveSpeedAI.VideoGenerationRequest request,
+            global::WaveSpeedAI.AutoSDKRequestOptions? requestOptions = default,
+            global::System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Generate video with Wan 2.1 Text-to-Video (480p)<br/>
+        /// Generates a 480p video from a text prompt using the Wan 2.1 model.
+        /// </summary>
         /// <param name="prompt">
         /// Text description of the video to generate.
         /// </param>
