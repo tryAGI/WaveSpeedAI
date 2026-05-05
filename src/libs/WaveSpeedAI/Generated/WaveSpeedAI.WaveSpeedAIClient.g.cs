@@ -45,7 +45,7 @@ namespace WaveSpeedAI
         /// <summary>
         /// 
         /// </summary>
-        public ImageGenerationClient ImageGeneration => new ImageGenerationClient(HttpClient, authorizations: Authorizations, options: Options)
+        public ImageGenerationClient ImageGeneration => new ImageGenerationClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContext = JsonSerializerContext,
@@ -54,7 +54,7 @@ namespace WaveSpeedAI
         /// <summary>
         /// 
         /// </summary>
-        public MediaClient Media => new MediaClient(HttpClient, authorizations: Authorizations, options: Options)
+        public MediaClient Media => new MediaClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContext = JsonSerializerContext,
@@ -63,7 +63,7 @@ namespace WaveSpeedAI
         /// <summary>
         /// 
         /// </summary>
-        public PredictionsClient Predictions => new PredictionsClient(HttpClient, authorizations: Authorizations, options: Options)
+        public PredictionsClient Predictions => new PredictionsClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContext = JsonSerializerContext,
@@ -72,7 +72,7 @@ namespace WaveSpeedAI
         /// <summary>
         /// 
         /// </summary>
-        public VideoGenerationClient VideoGeneration => new VideoGenerationClient(HttpClient, authorizations: Authorizations, options: Options)
+        public VideoGenerationClient VideoGeneration => new VideoGenerationClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContext = JsonSerializerContext,
@@ -111,10 +111,10 @@ namespace WaveSpeedAI
         /// <param name="options">Client-wide request defaults such as headers, query parameters, retries, and timeout.</param>
         /// <param name="disposeHttpClient">Dispose the HttpClient when the instance is disposed. True by default.</param>
         public WaveSpeedAIClient(
-            global::System.Net.Http.HttpClient? httpClient = null,
-            global::System.Uri? baseUri = null,
-            global::System.Collections.Generic.List<global::WaveSpeedAI.EndPointAuthorization>? authorizations = null,
-            global::WaveSpeedAI.AutoSDKClientOptions? options = null,
+            global::System.Net.Http.HttpClient? httpClient,
+            global::System.Uri? baseUri,
+            global::System.Collections.Generic.List<global::WaveSpeedAI.EndPointAuthorization>? authorizations,
+            global::WaveSpeedAI.AutoSDKClientOptions? options,
             bool disposeHttpClient = true)
         {
 
