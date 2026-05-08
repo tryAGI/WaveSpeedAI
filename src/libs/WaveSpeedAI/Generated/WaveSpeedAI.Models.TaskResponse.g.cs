@@ -29,6 +29,19 @@ namespace WaveSpeedAI
         /// <summary>
         /// 
         /// </summary>
+        public bool TryPickApi(
+#if NET6_0_OR_GREATER
+            [global::System.Diagnostics.CodeAnalysis.NotNullWhen(true)]
+#endif
+            out global::WaveSpeedAI.ApiResponse? value)
+        {
+            value = Api;
+            return IsApi;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
 #if NET6_0_OR_GREATER
         public global::WaveSpeedAI.TaskResponseVariant2? TaskResponseVariant2 { get; init; }
 #else
@@ -42,6 +55,19 @@ namespace WaveSpeedAI
         [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, nameof(TaskResponseVariant2))]
 #endif
         public bool IsTaskResponseVariant2 => TaskResponseVariant2 != null;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool TryPickTaskResponseVariant2(
+#if NET6_0_OR_GREATER
+            [global::System.Diagnostics.CodeAnalysis.NotNullWhen(true)]
+#endif
+            out global::WaveSpeedAI.TaskResponseVariant2? value)
+        {
+            value = TaskResponseVariant2;
+            return IsTaskResponseVariant2;
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -118,8 +144,8 @@ namespace WaveSpeedAI
         /// 
         /// </summary>
         public TResult? Match<TResult>(
-            global::System.Func<global::WaveSpeedAI.ApiResponse?, TResult>? api = null,
-            global::System.Func<global::WaveSpeedAI.TaskResponseVariant2?, TResult>? taskResponseVariant2 = null,
+            global::System.Func<global::WaveSpeedAI.ApiResponse, TResult>? api = null,
+            global::System.Func<global::WaveSpeedAI.TaskResponseVariant2, TResult>? taskResponseVariant2 = null,
             bool validate = true)
         {
             if (validate)
@@ -143,8 +169,32 @@ namespace WaveSpeedAI
         /// 
         /// </summary>
         public void Match(
-            global::System.Action<global::WaveSpeedAI.ApiResponse?>? api = null,
-            global::System.Action<global::WaveSpeedAI.TaskResponseVariant2?>? taskResponseVariant2 = null,
+            global::System.Action<global::WaveSpeedAI.ApiResponse>? api = null,
+
+            global::System.Action<global::WaveSpeedAI.TaskResponseVariant2>? taskResponseVariant2 = null,
+            bool validate = true)
+        {
+            if (validate)
+            {
+                Validate();
+            }
+
+            if (IsApi)
+            {
+                api?.Invoke(Api!);
+            }
+            else if (IsTaskResponseVariant2)
+            {
+                taskResponseVariant2?.Invoke(TaskResponseVariant2!);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Switch(
+            global::System.Action<global::WaveSpeedAI.ApiResponse>? api = null,
+            global::System.Action<global::WaveSpeedAI.TaskResponseVariant2>? taskResponseVariant2 = null,
             bool validate = true)
         {
             if (validate)
