@@ -89,6 +89,11 @@ namespace WaveSpeedAI
         /// <summary>
         /// 
         /// </summary>
+        public static UploadResponse FromApi(global::WaveSpeedAI.ApiResponse? value) => new UploadResponse(value);
+
+        /// <summary>
+        /// 
+        /// </summary>
         public static implicit operator UploadResponse(global::WaveSpeedAI.UploadResponseVariant2 value) => new UploadResponse((global::WaveSpeedAI.UploadResponseVariant2?)value);
 
         /// <summary>
@@ -103,6 +108,11 @@ namespace WaveSpeedAI
         {
             UploadResponseVariant2 = value;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static UploadResponse FromUploadResponseVariant2(global::WaveSpeedAI.UploadResponseVariant2? value) => new UploadResponse(value);
 
         /// <summary>
         /// 

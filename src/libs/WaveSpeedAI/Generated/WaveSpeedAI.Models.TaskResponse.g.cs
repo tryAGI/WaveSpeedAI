@@ -89,6 +89,11 @@ namespace WaveSpeedAI
         /// <summary>
         /// 
         /// </summary>
+        public static TaskResponse FromApi(global::WaveSpeedAI.ApiResponse? value) => new TaskResponse(value);
+
+        /// <summary>
+        /// 
+        /// </summary>
         public static implicit operator TaskResponse(global::WaveSpeedAI.TaskResponseVariant2 value) => new TaskResponse((global::WaveSpeedAI.TaskResponseVariant2?)value);
 
         /// <summary>
@@ -103,6 +108,11 @@ namespace WaveSpeedAI
         {
             TaskResponseVariant2 = value;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static TaskResponse FromTaskResponseVariant2(global::WaveSpeedAI.TaskResponseVariant2? value) => new TaskResponse(value);
 
         /// <summary>
         /// 

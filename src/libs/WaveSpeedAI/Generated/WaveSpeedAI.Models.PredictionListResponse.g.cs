@@ -89,6 +89,11 @@ namespace WaveSpeedAI
         /// <summary>
         /// 
         /// </summary>
+        public static PredictionListResponse FromApi(global::WaveSpeedAI.ApiResponse? value) => new PredictionListResponse(value);
+
+        /// <summary>
+        /// 
+        /// </summary>
         public static implicit operator PredictionListResponse(global::WaveSpeedAI.PredictionListResponseVariant2 value) => new PredictionListResponse((global::WaveSpeedAI.PredictionListResponseVariant2?)value);
 
         /// <summary>
@@ -103,6 +108,11 @@ namespace WaveSpeedAI
         {
             PredictionListResponseVariant2 = value;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static PredictionListResponse FromPredictionListResponseVariant2(global::WaveSpeedAI.PredictionListResponseVariant2? value) => new PredictionListResponse(value);
 
         /// <summary>
         /// 
