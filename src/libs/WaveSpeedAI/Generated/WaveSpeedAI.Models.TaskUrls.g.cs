@@ -41,5 +41,6 @@ namespace WaveSpeedAI
         public TaskUrls()
         {
         }
+
     }
 }

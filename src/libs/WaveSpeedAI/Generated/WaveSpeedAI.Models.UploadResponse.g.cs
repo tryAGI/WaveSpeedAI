@@ -42,6 +42,13 @@ namespace WaveSpeedAI
         /// <summary>
         /// 
         /// </summary>
+        public global::WaveSpeedAI.ApiResponse PickApi() => IsApi
+            ? Api!
+            : throw new global::System.InvalidOperationException($"Expected union variant 'Api' but the value was {ToString()}.");
+
+        /// <summary>
+        /// 
+        /// </summary>
 #if NET6_0_OR_GREATER
         public global::WaveSpeedAI.UploadResponseVariant2? UploadResponseVariant2 { get; init; }
 #else
@@ -68,6 +75,13 @@ namespace WaveSpeedAI
             value = UploadResponseVariant2;
             return IsUploadResponseVariant2;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::WaveSpeedAI.UploadResponseVariant2 PickUploadResponseVariant2() => IsUploadResponseVariant2
+            ? UploadResponseVariant2!
+            : throw new global::System.InvalidOperationException($"Expected union variant 'UploadResponseVariant2' but the value was {ToString()}.");
         /// <summary>
         /// 
         /// </summary>

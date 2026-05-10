@@ -50,5 +50,6 @@ namespace WaveSpeedAI
         public PredictionListData()
         {
         }
+
     }
 }

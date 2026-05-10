@@ -132,5 +132,6 @@ namespace WaveSpeedAI
         public VideoGenerationRequest()
         {
         }
+
     }
 }

@@ -103,5 +103,6 @@ namespace WaveSpeedAI
         public ListPredictionsRequest()
         {
         }
+
     }
 }
