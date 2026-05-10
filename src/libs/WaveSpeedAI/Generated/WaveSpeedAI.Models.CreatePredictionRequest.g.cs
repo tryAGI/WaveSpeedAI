@@ -178,5 +178,6 @@ namespace WaveSpeedAI
         public CreatePredictionRequest()
         {
         }
+
     }
 }

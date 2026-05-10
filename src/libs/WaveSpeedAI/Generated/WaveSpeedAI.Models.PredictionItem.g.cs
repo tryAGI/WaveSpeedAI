@@ -106,5 +106,6 @@ namespace WaveSpeedAI
         public PredictionItem()
         {
         }
+
     }
 }

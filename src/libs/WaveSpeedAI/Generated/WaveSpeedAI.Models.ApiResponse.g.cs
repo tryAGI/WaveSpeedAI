@@ -52,5 +52,6 @@ namespace WaveSpeedAI
         public ApiResponse()
         {
         }
+
     }
 }
