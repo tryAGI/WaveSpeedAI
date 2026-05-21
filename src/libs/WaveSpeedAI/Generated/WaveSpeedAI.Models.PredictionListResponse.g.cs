@@ -29,6 +29,26 @@ namespace WaveSpeedAI
         /// <summary>
         /// 
         /// </summary>
+        public bool TryPickApi(
+#if NET6_0_OR_GREATER
+            [global::System.Diagnostics.CodeAnalysis.NotNullWhen(true)]
+#endif
+            out global::WaveSpeedAI.ApiResponse? value)
+        {
+            value = Api;
+            return IsApi;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::WaveSpeedAI.ApiResponse PickApi() => IsApi
+            ? Api!
+            : throw new global::System.InvalidOperationException($"Expected union variant 'Api' but the value was {ToString()}.");
+
+        /// <summary>
+        /// 
+        /// </summary>
 #if NET6_0_OR_GREATER
         public global::WaveSpeedAI.PredictionListResponseVariant2? PredictionListResponseVariant2 { get; init; }
 #else
@@ -42,6 +62,26 @@ namespace WaveSpeedAI
         [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, nameof(PredictionListResponseVariant2))]
 #endif
         public bool IsPredictionListResponseVariant2 => PredictionListResponseVariant2 != null;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool TryPickPredictionListResponseVariant2(
+#if NET6_0_OR_GREATER
+            [global::System.Diagnostics.CodeAnalysis.NotNullWhen(true)]
+#endif
+            out global::WaveSpeedAI.PredictionListResponseVariant2? value)
+        {
+            value = PredictionListResponseVariant2;
+            return IsPredictionListResponseVariant2;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::WaveSpeedAI.PredictionListResponseVariant2 PickPredictionListResponseVariant2() => IsPredictionListResponseVariant2
+            ? PredictionListResponseVariant2!
+            : throw new global::System.InvalidOperationException($"Expected union variant 'PredictionListResponseVariant2' but the value was {ToString()}.");
         /// <summary>
         /// 
         /// </summary>
@@ -63,6 +103,11 @@ namespace WaveSpeedAI
         /// <summary>
         /// 
         /// </summary>
+        public static PredictionListResponse FromApi(global::WaveSpeedAI.ApiResponse? value) => new PredictionListResponse(value);
+
+        /// <summary>
+        /// 
+        /// </summary>
         public static implicit operator PredictionListResponse(global::WaveSpeedAI.PredictionListResponseVariant2 value) => new PredictionListResponse((global::WaveSpeedAI.PredictionListResponseVariant2?)value);
 
         /// <summary>
@@ -77,6 +122,11 @@ namespace WaveSpeedAI
         {
             PredictionListResponseVariant2 = value;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static PredictionListResponse FromPredictionListResponseVariant2(global::WaveSpeedAI.PredictionListResponseVariant2? value) => new PredictionListResponse(value);
 
         /// <summary>
         /// 
@@ -118,8 +168,8 @@ namespace WaveSpeedAI
         /// 
         /// </summary>
         public TResult? Match<TResult>(
-            global::System.Func<global::WaveSpeedAI.ApiResponse?, TResult>? api = null,
-            global::System.Func<global::WaveSpeedAI.PredictionListResponseVariant2?, TResult>? predictionListResponseVariant2 = null,
+            global::System.Func<global::WaveSpeedAI.ApiResponse, TResult>? api = null,
+            global::System.Func<global::WaveSpeedAI.PredictionListResponseVariant2, TResult>? predictionListResponseVariant2 = null,
             bool validate = true)
         {
             if (validate)
@@ -143,8 +193,32 @@ namespace WaveSpeedAI
         /// 
         /// </summary>
         public void Match(
-            global::System.Action<global::WaveSpeedAI.ApiResponse?>? api = null,
-            global::System.Action<global::WaveSpeedAI.PredictionListResponseVariant2?>? predictionListResponseVariant2 = null,
+            global::System.Action<global::WaveSpeedAI.ApiResponse>? api = null,
+
+            global::System.Action<global::WaveSpeedAI.PredictionListResponseVariant2>? predictionListResponseVariant2 = null,
+            bool validate = true)
+        {
+            if (validate)
+            {
+                Validate();
+            }
+
+            if (IsApi)
+            {
+                api?.Invoke(Api!);
+            }
+            else if (IsPredictionListResponseVariant2)
+            {
+                predictionListResponseVariant2?.Invoke(PredictionListResponseVariant2!);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Switch(
+            global::System.Action<global::WaveSpeedAI.ApiResponse>? api = null,
+            global::System.Action<global::WaveSpeedAI.PredictionListResponseVariant2>? predictionListResponseVariant2 = null,
             bool validate = true)
         {
             if (validate)

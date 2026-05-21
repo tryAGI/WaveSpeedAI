@@ -126,5 +126,6 @@ namespace WaveSpeedAI
         public TaskData()
         {
         }
+
     }
 }

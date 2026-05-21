@@ -93,6 +93,7 @@ namespace WaveSpeedAI.JsonConverters
             {
                 try
                 {
+
                     var typeInfo = typeInfoResolver.GetTypeInfo(typeof(global::WaveSpeedAI.ApiResponse), options) as global::System.Text.Json.Serialization.Metadata.JsonTypeInfo<global::WaveSpeedAI.ApiResponse> ??
                                    throw new global::System.InvalidOperationException($"Cannot get type info for {typeof(global::WaveSpeedAI.ApiResponse).Name}");
                     api = global::System.Text.Json.JsonSerializer.Deserialize(__rawJson, typeInfo);
@@ -103,9 +104,13 @@ namespace WaveSpeedAI.JsonConverters
                 catch (global::System.InvalidOperationException)
                 {
                 }
+            }
 
+            if (api == null && taskResponseVariant2 == null)
+            {
                 try
                 {
+
                     var typeInfo = typeInfoResolver.GetTypeInfo(typeof(global::WaveSpeedAI.TaskResponseVariant2), options) as global::System.Text.Json.Serialization.Metadata.JsonTypeInfo<global::WaveSpeedAI.TaskResponseVariant2> ??
                                    throw new global::System.InvalidOperationException($"Cannot get type info for {typeof(global::WaveSpeedAI.TaskResponseVariant2).Name}");
                     taskResponseVariant2 = global::System.Text.Json.JsonSerializer.Deserialize(__rawJson, typeInfo);

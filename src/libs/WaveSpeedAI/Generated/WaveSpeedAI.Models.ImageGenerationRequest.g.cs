@@ -193,5 +193,6 @@ namespace WaveSpeedAI
         public ImageGenerationRequest()
         {
         }
+
     }
 }

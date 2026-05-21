@@ -39,5 +39,6 @@ namespace WaveSpeedAI
         public PredictionListResponseVariant2()
         {
         }
+
     }
 }

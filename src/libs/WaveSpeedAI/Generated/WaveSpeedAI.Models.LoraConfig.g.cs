@@ -54,5 +54,6 @@ namespace WaveSpeedAI
         public LoraConfig()
         {
         }
+
     }
 }

@@ -29,6 +29,26 @@ namespace WaveSpeedAI
         /// <summary>
         /// 
         /// </summary>
+        public bool TryPickApi(
+#if NET6_0_OR_GREATER
+            [global::System.Diagnostics.CodeAnalysis.NotNullWhen(true)]
+#endif
+            out global::WaveSpeedAI.ApiResponse? value)
+        {
+            value = Api;
+            return IsApi;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::WaveSpeedAI.ApiResponse PickApi() => IsApi
+            ? Api!
+            : throw new global::System.InvalidOperationException($"Expected union variant 'Api' but the value was {ToString()}.");
+
+        /// <summary>
+        /// 
+        /// </summary>
 #if NET6_0_OR_GREATER
         public global::WaveSpeedAI.UploadResponseVariant2? UploadResponseVariant2 { get; init; }
 #else
@@ -42,6 +62,26 @@ namespace WaveSpeedAI
         [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, nameof(UploadResponseVariant2))]
 #endif
         public bool IsUploadResponseVariant2 => UploadResponseVariant2 != null;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool TryPickUploadResponseVariant2(
+#if NET6_0_OR_GREATER
+            [global::System.Diagnostics.CodeAnalysis.NotNullWhen(true)]
+#endif
+            out global::WaveSpeedAI.UploadResponseVariant2? value)
+        {
+            value = UploadResponseVariant2;
+            return IsUploadResponseVariant2;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public global::WaveSpeedAI.UploadResponseVariant2 PickUploadResponseVariant2() => IsUploadResponseVariant2
+            ? UploadResponseVariant2!
+            : throw new global::System.InvalidOperationException($"Expected union variant 'UploadResponseVariant2' but the value was {ToString()}.");
         /// <summary>
         /// 
         /// </summary>
@@ -63,6 +103,11 @@ namespace WaveSpeedAI
         /// <summary>
         /// 
         /// </summary>
+        public static UploadResponse FromApi(global::WaveSpeedAI.ApiResponse? value) => new UploadResponse(value);
+
+        /// <summary>
+        /// 
+        /// </summary>
         public static implicit operator UploadResponse(global::WaveSpeedAI.UploadResponseVariant2 value) => new UploadResponse((global::WaveSpeedAI.UploadResponseVariant2?)value);
 
         /// <summary>
@@ -77,6 +122,11 @@ namespace WaveSpeedAI
         {
             UploadResponseVariant2 = value;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static UploadResponse FromUploadResponseVariant2(global::WaveSpeedAI.UploadResponseVariant2? value) => new UploadResponse(value);
 
         /// <summary>
         /// 
@@ -118,8 +168,8 @@ namespace WaveSpeedAI
         /// 
         /// </summary>
         public TResult? Match<TResult>(
-            global::System.Func<global::WaveSpeedAI.ApiResponse?, TResult>? api = null,
-            global::System.Func<global::WaveSpeedAI.UploadResponseVariant2?, TResult>? uploadResponseVariant2 = null,
+            global::System.Func<global::WaveSpeedAI.ApiResponse, TResult>? api = null,
+            global::System.Func<global::WaveSpeedAI.UploadResponseVariant2, TResult>? uploadResponseVariant2 = null,
             bool validate = true)
         {
             if (validate)
@@ -143,8 +193,32 @@ namespace WaveSpeedAI
         /// 
         /// </summary>
         public void Match(
-            global::System.Action<global::WaveSpeedAI.ApiResponse?>? api = null,
-            global::System.Action<global::WaveSpeedAI.UploadResponseVariant2?>? uploadResponseVariant2 = null,
+            global::System.Action<global::WaveSpeedAI.ApiResponse>? api = null,
+
+            global::System.Action<global::WaveSpeedAI.UploadResponseVariant2>? uploadResponseVariant2 = null,
+            bool validate = true)
+        {
+            if (validate)
+            {
+                Validate();
+            }
+
+            if (IsApi)
+            {
+                api?.Invoke(Api!);
+            }
+            else if (IsUploadResponseVariant2)
+            {
+                uploadResponseVariant2?.Invoke(UploadResponseVariant2!);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Switch(
+            global::System.Action<global::WaveSpeedAI.ApiResponse>? api = null,
+            global::System.Action<global::WaveSpeedAI.UploadResponseVariant2>? uploadResponseVariant2 = null,
             bool validate = true)
         {
             if (validate)
