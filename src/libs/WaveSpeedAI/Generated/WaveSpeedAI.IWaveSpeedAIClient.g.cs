@@ -42,28 +42,28 @@ namespace WaveSpeedAI
 
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         global::System.Text.Json.Serialization.JsonSerializerContext JsonSerializerContext { get; set; }
 
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public ImageGenerationClient ImageGeneration { get; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public MediaClient Media { get; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public PredictionsClient Predictions { get; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public VideoGenerationClient VideoGeneration { get; }
 

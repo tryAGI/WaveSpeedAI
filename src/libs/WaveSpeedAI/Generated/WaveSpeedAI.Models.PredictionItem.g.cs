@@ -4,7 +4,7 @@
 namespace WaveSpeedAI
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class PredictionItem
     {
@@ -46,7 +46,7 @@ namespace WaveSpeedAI
         public double? ExecutionTime { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("timings")]
         public global::WaveSpeedAI.TaskTimings? Timings { get; set; }

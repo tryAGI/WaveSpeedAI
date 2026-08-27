@@ -5,12 +5,12 @@
 namespace WaveSpeedAI
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public readonly partial struct TaskResponse : global::System.IEquatable<TaskResponse>
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
 #if NET6_0_OR_GREATER
         public global::WaveSpeedAI.ApiResponse? Api { get; init; }
@@ -19,7 +19,7 @@ namespace WaveSpeedAI
 #endif
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
 #if NET6_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, nameof(Api))]
@@ -27,7 +27,7 @@ namespace WaveSpeedAI
         public bool IsApi => Api != null;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public bool TryPickApi(
 #if NET6_0_OR_GREATER
@@ -40,14 +40,14 @@ namespace WaveSpeedAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public global::WaveSpeedAI.ApiResponse PickApi() => IsApi
             ? Api!
             : throw new global::System.InvalidOperationException($"Expected union variant 'Api' but the value was {ToString()}.");
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
 #if NET6_0_OR_GREATER
         public global::WaveSpeedAI.TaskResponseVariant2? TaskResponseVariant2 { get; init; }
@@ -56,7 +56,7 @@ namespace WaveSpeedAI
 #endif
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
 #if NET6_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, nameof(TaskResponseVariant2))]
@@ -64,7 +64,7 @@ namespace WaveSpeedAI
         public bool IsTaskResponseVariant2 => TaskResponseVariant2 != null;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public bool TryPickTaskResponseVariant2(
 #if NET6_0_OR_GREATER
@@ -77,23 +77,23 @@ namespace WaveSpeedAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public global::WaveSpeedAI.TaskResponseVariant2 PickTaskResponseVariant2() => IsTaskResponseVariant2
             ? TaskResponseVariant2!
             : throw new global::System.InvalidOperationException($"Expected union variant 'TaskResponseVariant2' but the value was {ToString()}.");
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static implicit operator TaskResponse(global::WaveSpeedAI.ApiResponse value) => new TaskResponse((global::WaveSpeedAI.ApiResponse?)value);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static implicit operator global::WaveSpeedAI.ApiResponse?(TaskResponse @this) => @this.Api;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public TaskResponse(global::WaveSpeedAI.ApiResponse? value)
         {
@@ -101,22 +101,22 @@ namespace WaveSpeedAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static TaskResponse FromApi(global::WaveSpeedAI.ApiResponse? value) => new TaskResponse(value);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static implicit operator TaskResponse(global::WaveSpeedAI.TaskResponseVariant2 value) => new TaskResponse((global::WaveSpeedAI.TaskResponseVariant2?)value);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static implicit operator global::WaveSpeedAI.TaskResponseVariant2?(TaskResponse @this) => @this.TaskResponseVariant2;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public TaskResponse(global::WaveSpeedAI.TaskResponseVariant2? value)
         {
@@ -124,12 +124,12 @@ namespace WaveSpeedAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static TaskResponse FromTaskResponseVariant2(global::WaveSpeedAI.TaskResponseVariant2? value) => new TaskResponse(value);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public TaskResponse(
             global::WaveSpeedAI.ApiResponse? api,
@@ -141,23 +141,23 @@ namespace WaveSpeedAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public object? Object =>
             TaskResponseVariant2 as object ??
-            Api as object 
+            Api as object
             ;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public override string? ToString() =>
             Api?.ToString() ??
-            TaskResponseVariant2?.ToString() 
+            TaskResponseVariant2?.ToString()
             ;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public bool Validate()
         {
@@ -165,7 +165,7 @@ namespace WaveSpeedAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public TResult? Match<TResult>(
             global::System.Func<global::WaveSpeedAI.ApiResponse, TResult>? api = null,
@@ -190,7 +190,7 @@ namespace WaveSpeedAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public void Match(
             global::System.Action<global::WaveSpeedAI.ApiResponse>? api = null,
@@ -214,7 +214,7 @@ namespace WaveSpeedAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public void Switch(
             global::System.Action<global::WaveSpeedAI.ApiResponse>? api = null,
@@ -237,7 +237,7 @@ namespace WaveSpeedAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public override int GetHashCode()
         {
@@ -258,18 +258,18 @@ namespace WaveSpeedAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public bool Equals(TaskResponse other)
         {
             return
                 global::System.Collections.Generic.EqualityComparer<global::WaveSpeedAI.ApiResponse?>.Default.Equals(Api, other.Api) &&
-                global::System.Collections.Generic.EqualityComparer<global::WaveSpeedAI.TaskResponseVariant2?>.Default.Equals(TaskResponseVariant2, other.TaskResponseVariant2) 
+                global::System.Collections.Generic.EqualityComparer<global::WaveSpeedAI.TaskResponseVariant2?>.Default.Equals(TaskResponseVariant2, other.TaskResponseVariant2)
                 ;
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static bool operator ==(TaskResponse obj1, TaskResponse obj2)
         {
@@ -277,7 +277,7 @@ namespace WaveSpeedAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static bool operator !=(TaskResponse obj1, TaskResponse obj2)
         {
@@ -285,7 +285,7 @@ namespace WaveSpeedAI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public override bool Equals(object? obj)
         {

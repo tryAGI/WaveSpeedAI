@@ -4,12 +4,12 @@
 namespace WaveSpeedAI
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class UploadResponseVariant2
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("data")]
         public global::WaveSpeedAI.UploadData? Data { get; set; }

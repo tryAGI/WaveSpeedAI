@@ -40,7 +40,7 @@ namespace WaveSpeedAI
         internal global::System.Lazy<global::System.Text.Json.Serialization.JsonSerializerContext> JsonSerializerContextProvider { get; set; } = new(() => global::WaveSpeedAI.SourceGenerationContext.Default);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public global::System.Text.Json.Serialization.JsonSerializerContext JsonSerializerContext
         {
@@ -50,7 +50,7 @@ namespace WaveSpeedAI
 
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public ImageGenerationClient ImageGeneration => new ImageGenerationClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
@@ -59,7 +59,7 @@ namespace WaveSpeedAI
         };
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public MediaClient Media => new MediaClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
@@ -68,7 +68,7 @@ namespace WaveSpeedAI
         };
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public PredictionsClient Predictions => new PredictionsClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
@@ -77,7 +77,7 @@ namespace WaveSpeedAI
         };
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public VideoGenerationClient VideoGeneration => new VideoGenerationClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {

@@ -4,12 +4,12 @@
 namespace WaveSpeedAI
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class PredictionListResponseVariant2
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("data")]
         public global::WaveSpeedAI.PredictionListData? Data { get; set; }

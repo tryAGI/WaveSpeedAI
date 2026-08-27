@@ -4,7 +4,7 @@
 namespace WaveSpeedAI
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class TaskData
     {
@@ -27,7 +27,7 @@ namespace WaveSpeedAI
         public global::System.Collections.Generic.IList<string>? Outputs { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("urls")]
         public global::WaveSpeedAI.TaskUrls? Urls { get; set; }
@@ -58,7 +58,7 @@ namespace WaveSpeedAI
         public string? Error { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("timings")]
         public global::WaveSpeedAI.TaskTimings? Timings { get; set; }
