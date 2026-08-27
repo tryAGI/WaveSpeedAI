@@ -20,7 +20,7 @@ namespace WaveSpeedAI.JsonConverters
                     {
                         return global::WaveSpeedAI.VideoGenerationRequestOutputFormatExtensions.ToEnum(stringValue) ?? default;
                     }
-                    
+
                     break;
                 }
                 case global::System.Text.Json.JsonTokenType.Number:

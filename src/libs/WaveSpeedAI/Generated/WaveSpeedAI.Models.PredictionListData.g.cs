@@ -4,7 +4,7 @@
 namespace WaveSpeedAI
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class PredictionListData
     {
@@ -15,7 +15,7 @@ namespace WaveSpeedAI
         public int? Page { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("items")]
         public global::System.Collections.Generic.IList<global::WaveSpeedAI.PredictionItem>? Items { get; set; }

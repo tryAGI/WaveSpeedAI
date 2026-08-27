@@ -10,11 +10,11 @@ namespace WaveSpeedAI
     public enum VideoGenerationRequestOutputFormat
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Gif,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Mp4,
     }
