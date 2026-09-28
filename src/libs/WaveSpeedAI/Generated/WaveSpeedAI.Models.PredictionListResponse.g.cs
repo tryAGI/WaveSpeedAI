@@ -42,8 +42,8 @@ namespace WaveSpeedAI
         /// <summary>
         ///
         /// </summary>
-        public global::WaveSpeedAI.ApiResponse PickApi() => IsApi
-            ? Api!
+        public global::WaveSpeedAI.ApiResponse PickApi() => Api is { } value
+            ? value
             : throw new global::System.InvalidOperationException($"Expected union variant 'Api' but the value was {ToString()}.");
 
         /// <summary>
@@ -79,8 +79,8 @@ namespace WaveSpeedAI
         /// <summary>
         ///
         /// </summary>
-        public global::WaveSpeedAI.PredictionListResponseVariant2 PickPredictionListResponseVariant2() => IsPredictionListResponseVariant2
-            ? PredictionListResponseVariant2!
+        public global::WaveSpeedAI.PredictionListResponseVariant2 PickPredictionListResponseVariant2() => PredictionListResponseVariant2 is { } value
+            ? value
             : throw new global::System.InvalidOperationException($"Expected union variant 'PredictionListResponseVariant2' but the value was {ToString()}.");
         /// <summary>
         ///
@@ -177,13 +177,13 @@ namespace WaveSpeedAI
                 Validate();
             }
 
-            if (IsApi && api != null)
+            if (Api is { } __value0 && api != null)
             {
-                return api(Api!);
+                return api(__value0);
             }
-            else if (IsPredictionListResponseVariant2 && predictionListResponseVariant2 != null)
+            else if (PredictionListResponseVariant2 is { } __value1 && predictionListResponseVariant2 != null)
             {
-                return predictionListResponseVariant2(PredictionListResponseVariant2!);
+                return predictionListResponseVariant2(__value1);
             }
 
             return default(TResult);
@@ -203,13 +203,13 @@ namespace WaveSpeedAI
                 Validate();
             }
 
-            if (IsApi)
+            if (Api is { } __value0)
             {
-                api?.Invoke(Api!);
+                api?.Invoke(__value0);
             }
-            else if (IsPredictionListResponseVariant2)
+            else if (PredictionListResponseVariant2 is { } __value1)
             {
-                predictionListResponseVariant2?.Invoke(PredictionListResponseVariant2!);
+                predictionListResponseVariant2?.Invoke(__value1);
             }
         }
 
@@ -226,13 +226,13 @@ namespace WaveSpeedAI
                 Validate();
             }
 
-            if (IsApi)
+            if (Api is { } __value0)
             {
-                api?.Invoke(Api!);
+                api?.Invoke(__value0);
             }
-            else if (IsPredictionListResponseVariant2)
+            else if (PredictionListResponseVariant2 is { } __value1)
             {
-                predictionListResponseVariant2?.Invoke(PredictionListResponseVariant2!);
+                predictionListResponseVariant2?.Invoke(__value1);
             }
         }
 

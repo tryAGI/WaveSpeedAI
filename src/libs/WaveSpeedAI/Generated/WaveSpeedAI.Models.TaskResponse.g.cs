@@ -42,8 +42,8 @@ namespace WaveSpeedAI
         /// <summary>
         ///
         /// </summary>
-        public global::WaveSpeedAI.ApiResponse PickApi() => IsApi
-            ? Api!
+        public global::WaveSpeedAI.ApiResponse PickApi() => Api is { } value
+            ? value
             : throw new global::System.InvalidOperationException($"Expected union variant 'Api' but the value was {ToString()}.");
 
         /// <summary>
@@ -79,8 +79,8 @@ namespace WaveSpeedAI
         /// <summary>
         ///
         /// </summary>
-        public global::WaveSpeedAI.TaskResponseVariant2 PickTaskResponseVariant2() => IsTaskResponseVariant2
-            ? TaskResponseVariant2!
+        public global::WaveSpeedAI.TaskResponseVariant2 PickTaskResponseVariant2() => TaskResponseVariant2 is { } value
+            ? value
             : throw new global::System.InvalidOperationException($"Expected union variant 'TaskResponseVariant2' but the value was {ToString()}.");
         /// <summary>
         ///
@@ -177,13 +177,13 @@ namespace WaveSpeedAI
                 Validate();
             }
 
-            if (IsApi && api != null)
+            if (Api is { } __value0 && api != null)
             {
-                return api(Api!);
+                return api(__value0);
             }
-            else if (IsTaskResponseVariant2 && taskResponseVariant2 != null)
+            else if (TaskResponseVariant2 is { } __value1 && taskResponseVariant2 != null)
             {
-                return taskResponseVariant2(TaskResponseVariant2!);
+                return taskResponseVariant2(__value1);
             }
 
             return default(TResult);
@@ -203,13 +203,13 @@ namespace WaveSpeedAI
                 Validate();
             }
 
-            if (IsApi)
+            if (Api is { } __value0)
             {
-                api?.Invoke(Api!);
+                api?.Invoke(__value0);
             }
-            else if (IsTaskResponseVariant2)
+            else if (TaskResponseVariant2 is { } __value1)
             {
-                taskResponseVariant2?.Invoke(TaskResponseVariant2!);
+                taskResponseVariant2?.Invoke(__value1);
             }
         }
 
@@ -226,13 +226,13 @@ namespace WaveSpeedAI
                 Validate();
             }
 
-            if (IsApi)
+            if (Api is { } __value0)
             {
-                api?.Invoke(Api!);
+                api?.Invoke(__value0);
             }
-            else if (IsTaskResponseVariant2)
+            else if (TaskResponseVariant2 is { } __value1)
             {
-                taskResponseVariant2?.Invoke(TaskResponseVariant2!);
+                taskResponseVariant2?.Invoke(__value1);
             }
         }
 
